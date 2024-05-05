@@ -1,7 +1,8 @@
 import { PostFetch } from "./utils/postFetch";
 import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
-
+import Filter from "./Components/Filter";
+import "./App.css";
 function App() {
   const [jobs, setJobs] = useState([]);
   var postbody = {
@@ -10,20 +11,16 @@ function App() {
   };
   useEffect(() => {
     const fetchdata = async () => {
-      const apicall = await PostFetch("getSampleJdJSON",postbody);
-      setJobs(apicall?.jdList)
+      const apicall = await PostFetch("getSampleJdJSON", postbody);
+      setJobs(apicall?.jdList);
     };
-    fetchdata()
-  },[]);
-  return <>
-    {
-      jobs.map(e=>{
-        return(
-          <div>{e.jobRole}</div>
-        )
-      })
-    }
-  </>;
+    fetchdata();
+  }, []);
+  return (
+    <div className="page">
+      <Filter />
+    </div>
+  );
 }
 
 export default App;

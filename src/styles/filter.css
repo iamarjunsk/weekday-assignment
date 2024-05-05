@@ -1,0 +1,82 @@
+.filter{
+    display: flex;
+    gap: .4rem;
+}
+.filter .fil-field{
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+    height: 2.4rem;
+    min-width: 9.4rem;
+    padding: .5rem .35rem;
+    gap: .4rem;
+    position: relative;
+}
+.filter .fil-field .values{
+    flex-grow: 1;
+    display: flex;
+    gap: .3rem;
+}
+.filter .fil-field .values input{
+    border: none;
+    outline: none;
+    width: 3rem;
+}
+.filter .fil-field .cls-btn{
+    border: none;
+    background: none;
+    color: #ccc;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.5rem;
+}
+.filter .fil-field .cls-btn:hover{
+    /* scale: 1.1; */
+    color: #999;
+}
+
+.filter .fil-field .divider{
+    background-color: #ccc;
+    align-self: stretch;
+    width: .05rem;
+}
+.filter .fil-field .caret{
+    /* translate: 0 25%;
+    border: .3rem solid transparent;
+    border-top-color: #ccc;
+    cursor: pointer; */
+    color: #ccc;
+}
+.filter .fil-field ul{
+    position: absolute;
+    width: 100%;
+    translate: -6px 0px;
+    top: 2.5rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    padding: .65rem 0;
+    height: 14rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.fil-field ul li{
+    list-style: none;
+    padding: .4rem;
+    cursor: pointer;
+}
+.fil-field ul li:hover{
+    background-color: #a0a0de4a;
+}
+.fil-field .values .selected-opt{
+    padding: .2rem .4rem;
+    display: flex;
+    gap: .3rem;
+    align-items: center;
+    background: #e6e6e6;
+    color: #333;
+    border-radius: 4px;
+    height: 1.3rem;
+    font-size: 12px;
+}
