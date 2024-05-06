@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import Filter from "./Components/Filter";
 import "./App.css";
+import "./styles/job-listing.css";
 import { useSelector } from "react-redux";
+import { Card } from "@mui/material";
+import JobCard from "./Components/JobCard";
 function App() {
   const { filter } = useSelector((state) => state.filter);
-  console.log({filter});
+  console.log({ filter });
   const [jobs, setJobs] = useState([]);
   var postbody = {
     limit: 10,
@@ -22,6 +25,13 @@ function App() {
   return (
     <div className="page">
       <Filter />
+      <div className="job-listing">
+        {jobs.map((job) => {
+          return (
+            <JobCard job={job} />
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 .filter{
     display: flex;
     gap: .4rem;
+    flex-wrap: wrap;
 }
 .filter .fil-field{
     display: flex;

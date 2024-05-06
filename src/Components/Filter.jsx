@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import "../styles/filter.css";
 import Select from "./Select";
 import { PostFetch } from "../utils/postFetch";
+import { useDispatch } from "react-redux";
+import { setFilter } from "../redux/filter";
+
 export default function Filter() {
   const [exp, setExp] = useState([]);
   const [comp, setComp] = useState([]);
@@ -9,7 +12,21 @@ export default function Filter() {
   const [rols, setRols] = useState([]);
   const [MinBas, setMinBas] = useState([]);
   const [workty, setWorkty] = useState([]);
-  
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      setFilter({
+        companies: comp,
+        locations: loc,
+        roles: rols,
+        minBasePay: MinBas,
+        experience: exp,
+        worktype: workty,
+      })
+    );
+  }, [exp, comp, loc, rols, MinBas, workty]);
+
   const [wholedata, setWholeData] = useState([]);
   const [fileterOp, setFilterOP] = useState({
     companies: [],
