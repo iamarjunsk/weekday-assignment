@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setFilter } from "../redux/filter";
 
 export default function Filter() {
+  // State variables for filter options
   const [exp, setExp] = useState([]);
   const [comp, setComp] = useState([]);
   const [loc, setLoc] = useState([]);
@@ -14,6 +15,8 @@ export default function Filter() {
   const [workty, setWorkty] = useState([]);
 
   const dispatch = useDispatch();
+
+  // Update Redux store with filter options whenever they change
   useEffect(() => {
     dispatch(
       setFilter({
@@ -27,6 +30,7 @@ export default function Filter() {
     );
   }, [exp, comp, loc, rols, MinBas, workty]);
 
+  // State variables for fetching and storing data from API
   const [wholedata, setWholeData] = useState([]);
   const [fileterOp, setFilterOP] = useState({
     companies: [],
@@ -34,6 +38,8 @@ export default function Filter() {
     roles: [],
     minBasePay: [],
   });
+
+  // Initial API call to fetch data
   var postbody = {
     limit: 1000,
     offset: 0,
@@ -52,6 +58,7 @@ export default function Filter() {
       const apicall = await PostFetch("getSampleJdJSON", postbody);
       totaldata = apicall?.jdList;
       dataCount = apicall.totalCount;
+      // Extract filter options from fetched data
       totaldata.forEach((e) => {
         !companies.includes(e.companyName) && e.companyName
           ? companies.push(e.companyName)
@@ -64,31 +71,11 @@ export default function Filter() {
           ? minBasePay.push(e.minJdSalary)
           : null;
       });
+      // Set filter options state
       setFilterOP({
-        companies: companies.sort((a, b) => {
-          const aLower = a.toLowerCase();
-          const bLower = b.toLowerCase();
-
-          if (aLower < bLower) return -1;
-          if (aLower > bLower) return 1;
-          return 0;
-        }),
-        locations: locations.sort((a, b) => {
-          const aLower = a.toLowerCase();
-          const bLower = b.toLowerCase();
-
-          if (aLower < bLower) return -1;
-          if (aLower > bLower) return 1;
-          return 0;
-        }),
-        roles: roles.sort((a, b) => {
-          const aLower = a.toLowerCase();
-          const bLower = b.toLowerCase();
-
-          if (aLower < bLower) return -1;
-          if (aLower > bLower) return 1;
-          return 0;
-        }),
+        companies: companies.sort((a, b) => a.localeCompare(b)),
+        locations: locations.sort((a, b) => a.localeCompare(b)),
+        roles: roles.sort((a, b) => a.localeCompare(b)),
         minBasePay: minBasePay.sort((a, b) => a - b),
       });
     };
@@ -97,6 +84,7 @@ export default function Filter() {
 
   return (
     <div className="filter">
+      {/* Dropdowns for selecting filter options */}
       <Select
         placeholder={"Roles"}
         _options={fileterOp.roles}
@@ -109,7 +97,6 @@ export default function Filter() {
         value={exp}
         onChange={setExp}
       />
-
       <Select
         placeholder={"Work Type"}
         _options={worktype}
@@ -122,7 +109,6 @@ export default function Filter() {
         value={loc}
         onChange={setLoc}
       />
-
       <Select
         placeholder={"Min Base pay"}
         _options={fileterOp.minBasePay}
