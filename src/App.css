@@ -8,3 +8,11 @@
     margin: 0 auto;
     padding: 3rem;
 }
+::-webkit-scrollbar{
+    width: .4rem;
+    
+}
+::-webkit-scrollbar-thumb{
+    background: #666666;
+    border-radius: 4px;
+}

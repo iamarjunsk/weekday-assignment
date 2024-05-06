@@ -28,6 +28,21 @@ export default function Select({ value, onChange, _options, placeholder }) {
     function handleTogggle(){
         setToggle((prv)=> !prv)
     }
+    function search(val){
+        if(val == ''){
+            let resultArray = _options.filter(item => !value.includes(item));
+            setOptions(resultArray)
+            return
+        }
+        const array = options.filter(item => {
+            if (typeof item === 'string') {
+                return item.includes(val);
+            } else if (typeof item === 'number') {
+                return item.toString().includes(val);
+            }
+        })
+        setOptions(array)
+    }
     return (
     <div className="fil-field">
       <span className="values">
@@ -38,7 +53,7 @@ export default function Select({ value, onChange, _options, placeholder }) {
             </span>
           );
         })}
-        <input type="text" placeholder={!value?.length ? placeholder : ""} />
+        <input type="text" onChange={(e)=>search(e.target.value)} placeholder={!value?.length ? placeholder : ""} />
       </span>
       <button className="cls-btn">&times;</button>
       <div className="divider"></div>
